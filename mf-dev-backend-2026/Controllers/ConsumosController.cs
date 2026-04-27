@@ -47,7 +47,7 @@ namespace mf_dev_backend_2026.Controllers
         // GET: Consumos/Create
         public IActionResult Create()
         {
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Marca");
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Nome");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace mf_dev_backend_2026.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Marca", consumo.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Nome", consumo.VeiculoId);
             return View(consumo);
         }
 
@@ -81,7 +81,7 @@ namespace mf_dev_backend_2026.Controllers
             {
                 return NotFound();
             }
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Marca", consumo.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Nome", consumo.VeiculoId);
             return View(consumo);
         }
 
@@ -117,7 +117,7 @@ namespace mf_dev_backend_2026.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Marca", consumo.VeiculoId);
+            ViewData["VeiculoId"] = new SelectList(_context.Veiculos, "Id", "Nome", consumo.VeiculoId);
             return View(consumo);
         }
 
