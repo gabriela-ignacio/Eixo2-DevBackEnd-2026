@@ -15,5 +15,7 @@ namespace mf_dev_backend_2026.Models
 
         public DbSet<Consumo> Consumos { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
     }
 }
