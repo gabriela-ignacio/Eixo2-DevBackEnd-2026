@@ -109,5 +109,32 @@ namespace mf_dev_backend_2026.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Relatorio(int? Id) 
+        {
+            if (Id == null)
+                return NotFound();
+
+            var dados = await _context.Veiculos.FindAsync(Id);
+
+            if (dados == null)
+                return NotFound();
+
+            var consumos = await _context.Consumos
+                .Where(c => c.VeiculoId == Id)
+                .OrderByDescending(c => c.Data)
+                .ToListAsync();
+            
+            decimal total = consumos.Sum(c => c.Valor);
+
+            ViewBag.Veiculo = dados;
+            ViewBag.Total = total;
+
+            return View(consumos);
+
+
+
+
+        }
+
     }
 }
