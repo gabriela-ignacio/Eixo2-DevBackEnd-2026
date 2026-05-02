@@ -1,8 +1,123 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "ControlaCar";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem-vindo ao ControlaCar</h1>
-    <p>O seu gerenciador de Veículos.</p>
+<style>
+    body {
+        background-color: #0f1115;
+        color: #e5e7eb;
+    }
+
+    .hero {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        color: #f3f4f6;
+        padding: 80px 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 40px;
+        border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.85;
+        }
+
+    .feature-card {
+        border-radius: 12px;
+        padding: 25px;
+        transition: 0.3s;
+        background: #1a1d23;
+        border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #3b82f6;
+        margin-bottom: 15px;
+    }
+
+    .btn-dark-primary {
+        background-color: #2563eb;
+        border: none;
+        color: white;
+    }
+
+        .btn-dark-primary:hover {
+            background-color: #1d4ed8;
+        }
+</style>
+
+<div class="hero">
+    <h1>Bem-vindo ao ControlaCar</h1>
+    <p>Gerencie seus veículos, acompanhe consumos e controle seus gastos com estilo.</p>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-dark-primary btn-lg mt-3" asp-controller="Usuarios" asp-action="Login">
+            Começar Agora
+        </a>
+    }
+</div>
+
+<div class="container">
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">🚗</div>
+                <h4>Gerenciamento de Veículos</h4>
+                <p>Cadastre, edite e acompanhe todos os seus veículos em um só lugar.</p>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-dark-primary mt-2" asp-controller="Veiculos" asp-action="Index">Acessar</a>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">⛽</div>
+                <h4>Controle de Consumos</h4>
+                <p>Registre abastecimentos e despesas para acompanhar seus gastos.</p>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-dark-primary mt-2" asp-controller="Consumos" asp-action="Index">Acessar</a>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h4>Gestão de Usuários</h4>
+                <p>Administre contas e permissões (somente para administradores).</p>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="btn btn-dark-primary mt-2" asp-controller="Usuarios" asp-action="Index">Acessar</a>
+                }
+                else
+                {
+                    <p class="text-muted mt-2">Acesso restrito</p>
+                }
+            </div>
+        </div>
+
+    </div>
 </div>
